@@ -2,22 +2,23 @@
 
 @{
     ViewData["Title"] = "Category Page";
+    Layout = "_LayoutWithSidebar";
 }
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-10 col-xl-10">
-            <div style="text-align:center; size:20px; padding:10px; border-radius:5px; margin-bottom:10px;">
-                <h1 style="font-weight: bold;">Category List</h1>
-            </div>
-
-            <hr />
-            <div class="card mb-4">
-                <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <a asp-action="Create" class="btn btn-primary">Create New Category</a>
-
-            <div>
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0"><i class="bi bi-tags"></i> Category List</h2>
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create New Category
+            </a>
+        </div>
+        
+        <hr />
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-end align-items-center mb-3">
+                    <div>
                 <label for="pageSize" class="form-label me-2">Rows per page:</label>
                 <select id="pageSize" class="form-select d-inline-block" >
                     @foreach (var size in ViewBag.PageSizes as List<int>)
@@ -60,16 +61,18 @@
                         <td>@obj.DisbplayOrder</td>
                         <td>@obj.CreatedDateTime.ToString("yyyy-MM-dd HH:mm")</td>
                         <td>
-                            <a asp-action="Edit" class="btn btn-warning" asp-route-id="@obj.Id">Edit</a> |
-                            <a asp-action="Details" class="btn btn-success" asp-route-id="@obj.Id">Details</a> |
-                            <button type="button"
-                                    class="btn btn-danger btn-delete"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal"
-                                    data-id="@obj.Id"
-                                    data-name="@obj.Name">
-                                Delete
-                            </button>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@obj.Id">Edit</a>
+                                <a asp-action="Details" class="btn btn-success btn-sm" asp-route-id="@obj.Id">Details</a>
+                                <button type="button"
+                                        class="btn btn-danger btn-sm btn-delete"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal"
+                                        data-id="@obj.Id"
+                                        data-name="@obj.Name">
+                                    Delete
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 }
@@ -83,8 +86,8 @@
                     LiElementClasses = new[] { "page-item" },
                     PageClasses = new[] { "page-link" }
                 })
-        </div>
-    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

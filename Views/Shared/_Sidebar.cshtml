@@ -1,0 +1,82 @@
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+}
+
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h5 class="sidebar-brand">
+            <i class="bi bi-book"></i> BullkyBook
+        </h5>
+        <button class="btn btn-link text-light d-lg-none" id="sidebarClose">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link @(currentController == "Home" && currentAction == "Index" ? "active" : "")" 
+                   asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link @(currentController == "Category" ? "active" : "")" 
+                   asp-controller="Category" asp-action="Index">
+                    <i class="bi bi-tags"></i>
+                    <span>Categories</span>
+                </a>
+            </li>
+            
+            <!-- Future modules - uncomment when ready -->
+            @* <li class="nav-item">
+                <a class="nav-link @(currentController == "Product" ? "active" : "")" 
+                   asp-controller="Product" asp-action="Index">
+                    <i class="bi bi-box-seam"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link @(currentController == "Order" ? "active" : "")" 
+                   asp-controller="Order" asp-action="Index">
+                    <i class="bi bi-cart"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link @(currentController == "Customer" ? "active" : "")" 
+                   asp-controller="Customer" asp-action="Index">
+                    <i class="bi bi-people"></i>
+                    <span>Customers</span>
+                </a>
+            </li> *@
+            
+            <li class="nav-divider"></li>
+            
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Home" asp-action="Privacy">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Privacy</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <div class="sidebar-footer">
+        <div class="user-info">
+            <i class="bi bi-person-circle"></i>
+            <span>User</span>
+        </div>
+        <a href="#" class="btn btn-sm btn-outline-light w-100 mt-2">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+    </div>
+</div>
+
+<div class="sidebar-overlay d-lg-none" id="sidebarOverlay"></div>
+
