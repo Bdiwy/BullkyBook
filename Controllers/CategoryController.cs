@@ -16,5 +16,10 @@ namespace BullkyBook.Controllers
             IEnumerable<Category> obj = _db.Catagories.ToList();
             return View(obj);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

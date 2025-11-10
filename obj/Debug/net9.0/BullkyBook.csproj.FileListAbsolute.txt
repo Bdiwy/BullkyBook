@@ -229,3 +229,4 @@ D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\bin\Debug\net9.0\runtimes\wi
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\BullkyBook.csproj.Up2Date
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\09tmhzgt58-e4vvppxkt2.gz
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\352j5sjf7u-hjbjxjzsid.gz
+D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\BullkyBook.sourcelink.json
