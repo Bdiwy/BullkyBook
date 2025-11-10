@@ -8,15 +8,17 @@
 <hr />
 <div class="card mb-4">
     <div class="card-body">
-        <a asp-action="Create" class="btn btn-primary mb-4">Create New Category</a>
-    <form action="/store" method="post">
+        <a asp-action="Index" class="btn btn-dark mb-4">Back To Category</a>
+    <form asp-action="Store" method="post">
         <div class="mb-3">
-            <label for="categoryName" class="form-label">Category Name</label>
-            <input type="text" class="form-control" id="categoryName" name="categoryName" required>
+            <label asp-for="Name" class="form-label">Category Name</label>
+            <input type="text" class="form-control" id="categoryName" asp-for="Name" required>
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label for="displayOrder" class="form-label">Display Order</label>
-            <input type="number" class="form-control" id="displayOrder" name="displayOrder" required>
+            <label asp-for="DisbplayOrder" class="form-label">Display Order</label>
+            <input type="number" class="form-control" id="displayOrder" asp-for="DisbplayOrder" required>
+            <span asp-validation-for="DisplayOrder"></span>
         </div>
         <button type="submit" class="btn btn-success">Create Category</button>
     </form>

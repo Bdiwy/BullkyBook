@@ -21,5 +21,19 @@ namespace BullkyBook.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Store(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Catagories.Add(category);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Create", category);
+        }
+
     }
 }
