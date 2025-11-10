@@ -1,6 +1,7 @@
 using BullkyBook.Models;
 using DataBase;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 namespace BullkyBook.Controllers
 {
     public class CategoryController : Controller
@@ -11,11 +12,24 @@ namespace BullkyBook.Controllers
         {
             _db = db;
         }
-        public IActionResult Index()
+
+        
+        public IActionResult Index(int? page, int? pageSize)
         {
-            IEnumerable<Category> obj = _db.Catagories.ToList();
-            return View(obj);
+            int pageNumber = page ?? 1;
+            int currentPageSize = pageSize ?? 5; // default to 5 if not selected
+
+            var categories = _db.Catagories.OrderBy(c => c.Id).ToPagedList(pageNumber, currentPageSize);
+
+            ViewBag.PageSize = currentPageSize; // so we can use it in the dropdown
+            ViewBag.PageSizes = new List<int> { 3, 5, 8, 10, 15, 20, 25, 30, 35, 40, 50, 60, 100 };
+
+            return View(categories);
         }
+
+
+
+
 
         public IActionResult Create()
         {

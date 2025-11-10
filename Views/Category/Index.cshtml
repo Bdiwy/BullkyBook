@@ -1,62 +1,95 @@
-@model IEnumerable<Category>
+@model IPagedList<BullkyBook.Models.Category>
+
 @{
     ViewData["Title"] = "Category Page";
 }
+
 <div style="text-align:center; size:20px; padding:10px; border-radius:5px; margin-bottom:10px;">
     <h1 style="font-weight: bold;">Category List</h1>
 </div>
+
 <hr />
 <div class="card mb-4">
     <div class="card-body">
-        <a asp-action="Create" class="btn btn-primary mb-4">Create New Category</a>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a asp-action="Create" class="btn btn-primary">Create New Category</a>
 
-<table class="table table-bordered table-striped" style="width: 100%;">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Disbplay Order
-            </th>
-            <th>
-                Date Time
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var obj in Model)
-        {
-            <tr class="align-middle">
-                <td>
-                    @obj.Name
-                </td>
-                <td>
-                    @obj.DisbplayOrder
-                </td>
-                <td>
-                    @obj.CreatedDateTime
-                </td>
-                <td>
-                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@obj.Id">Edit</a> |
-                    <a asp-action="Details" class="btn btn-success" asp-route-id="@obj.Id">Details</a> |
-                       <button 
-                            type="button" 
-                            class="btn btn-danger btn-delete" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#deleteModal" 
-                            data-id="@obj.Id" 
-                            data-name="@obj.Name">
-                            Delete
-                        </button>
+            <div>
+                <label for="pageSize" class="form-label me-2">Rows per page:</label>
+                <select id="pageSize" class="form-select d-inline-block" >
+                    @foreach (var size in ViewBag.PageSizes as List<int>)
+                    {
+                        if (size == ViewBag.PageSize)
+                        {
+                            <option value="@size" selected>@size</option>
+                        }
+                        else
+                        {
+                            <option value="@size">@size</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <table class="table table-bordered table-striped" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Display Order</th>
+                    <th>Date Time</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int count = (Model.PageNumber - 1) * Model.PageSize + 1;
+                }
+                @foreach (var obj in Model)
+                {
+                    <tr class="align-middle">
+                        <td>@{
+                            @count;
+                            count++;
+                        }</td>
+                        <td>@obj.Name</td>
+                        <td>@obj.DisbplayOrder</td>
+                        <td>@obj.CreatedDateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>
+                            <a asp-action="Edit" class="btn btn-warning" asp-route-id="@obj.Id">Edit</a> |
+                            <a asp-action="Details" class="btn btn-success" asp-route-id="@obj.Id">Details</a> |
+                            <button type="button"
+                                    class="btn btn-danger btn-delete"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal"
+                                    data-id="@obj.Id"
+                                    data-name="@obj.Name">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-center mt-3">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.PageSize }),
+                new PagedListRenderOptions
+                {
+                    LiElementClasses = new[] { "page-item" },
+                    PageClasses = new[] { "page-link" }
+                })
+        </div>
     </div>
 </div>
+
 @await Html.PartialAsync("_DeleteModal")
 <script src="~/js/deleteModal.js"></script>
+
+<script>
+    document.getElementById("pageSize").addEventListener("change", function () {
+        const selectedSize = this.value;
+        window.location.href = '@Url.Action("Index", "Category")' + '?pageSize=' + selectedSize;
+    });
+</script>
