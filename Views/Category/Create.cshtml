@@ -1,26 +1,27 @@
-@model IEnumerable<Category>
+@model Category
+
 @{
-    ViewData["Title"] = "Category Page";
+    ViewData["Title"] = "Create Category";
 }
-<div style="text-align:center; size:20px; padding:10px; border-radius:5px; margin-bottom:10px;">
-    <h1 style="font-weight: bold;">Category List</h1>
-</div>
-<hr />
+
 <div class="card mb-4">
     <div class="card-body">
         <a asp-action="Index" class="btn btn-dark mb-4">Back To Category</a>
-    <form asp-action="Store" method="post">
-        <div class="mb-3">
-            <label asp-for="Name" class="form-label">Category Name</label>
-            <input type="text" class="form-control" id="categoryName" asp-for="Name" required>
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="DisbplayOrder" class="form-label">Display Order</label>
-            <input type="number" class="form-control" id="displayOrder" asp-for="DisbplayOrder" required>
-            <span asp-validation-for="DisplayOrder"></span>
-        </div>
-        <button type="submit" class="btn btn-success">Create Category</button>
-    </form>
+
+        <form asp-action="Store" method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DisbplayOrder" class="form-label"></label>
+                <input asp-for="DisbplayOrder" class="form-control" required />
+                <span asp-validation-for="DisbplayOrder" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">Create Category</button>
+        </form>
     </div>
 </div>
