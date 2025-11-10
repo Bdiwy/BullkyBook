@@ -4,12 +4,15 @@
     ViewData["Title"] = "Category Details";
 }
 
-<div style="text-align:center; size:20px; padding:10px; border-radius:5px; margin-bottom:10px;">
-    <h1 style="font-weight: bold;">Category Details</h1>
-</div>
-<hr />
-<div class="card mb-4">
-    <div class="card-body">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div style="text-align:center; size:20px; padding:10px; border-radius:5px; margin-bottom:10px;">
+                <h1 style="font-weight: bold;">Category Details</h1>
+            </div>
+            <hr />
+            <div class="card mb-4">
+                <div class="card-body">
         <a asp-action="Index" class="btn btn-dark mb-4">Back To Category</a>
         <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mb-4">Edit Category</a>
         <hr />
@@ -23,5 +26,8 @@
             <dt class="col-sm-3">Created Date:</dt>
             <dd class="col-sm-9">@Model.CreatedDateTime.ToString("yyyy-MM-dd HH:mm")</dd>
         </dl>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

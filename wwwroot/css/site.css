@@ -87,6 +87,59 @@ footer {
   margin-top: auto;
 }
 
+/* Category pages - restore standard Bootstrap button colors */
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+.btn-success:hover {
+  background-color: #157347;
+  border-color: #146c43;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+}
+
+.btn-warning:hover {
+  background-color: #ffca2c;
+  border-color: #ffc720;
+  color: #000;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #bb2d3b;
+  border-color: #b02a37;
+}
+
+.btn-dark {
+  background-color: #212529;
+  border-color: #212529;
+}
+
+.btn-dark:hover {
+  background-color: #1c1f23;
+  border-color: #1a1e21;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .hero-section {
