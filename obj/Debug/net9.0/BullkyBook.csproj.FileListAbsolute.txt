@@ -82,8 +82,6 @@ D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\xskgm5oj74-muycvpuwrr.gz
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\g0s9m0rt26-87fc7y1x7t.gz
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\9a82yrlpjj-mlv21k5csn.gz
-D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\4eags5yfsx-ag731zhnnm.gz
-D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\cv0sffl29p-ag731zhnnm.gz
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\staticwebassets.build.json
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\staticwebassets.build.json.cache
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\staticwebassets.development.json
@@ -228,5 +226,9 @@ D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\bin\Debug\net9.0\runtimes\wi
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\BullkyBook.csproj.Up2Date
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\09tmhzgt58-e4vvppxkt2.gz
-D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\352j5sjf7u-hjbjxjzsid.gz
 D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\BullkyBook.sourcelink.json
+D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\352j5sjf7u-b9sayid5wm.gz
+D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\4eags5yfsx-50dxltg83f.gz
+D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\cv0sffl29p-50dxltg83f.gz
+D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\l4euis9ixv-5v43gn4vlg.gz
+D:\OpenSourceProjects\Random-Projects\c#\BullkyBook\obj\Debug\net9.0\compressed\6z32wm08q7-59duowzy1j.gz

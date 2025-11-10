@@ -41,16 +41,15 @@
                 <td>
                     <a asp-action="Edit" class="btn btn-warning" asp-route-id="@obj.Id">Edit</a> |
                     <a asp-action="Details" class="btn btn-success" asp-route-id="@obj.Id">Details</a> |
-                    <button 
-                    type="button" 
-                    class="btn btn-danger" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#deleteModal" 
-                    data-id="@obj.Id"
-                    data-name="@obj.Name"
-                    data-controller="Category">
-                    Delete
-                    </button>
+                       <button 
+                            type="button" 
+                            class="btn btn-danger btn-delete" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#deleteModal" 
+                            data-id="@obj.Id" 
+                            data-name="@obj.Name">
+                            Delete
+                        </button>
 
                 </td>
             </tr>

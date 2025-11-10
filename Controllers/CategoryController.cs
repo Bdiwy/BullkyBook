@@ -68,5 +68,23 @@ namespace BullkyBook.Controllers
             return View("Edit", category);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if(id == null || id == 0)
+                return Json(new { success = false, message = "Invalid ID" });
+
+            var category = await _db.Catagories.FindAsync(id);
+            if(category == null)
+                return Json(new { success = false, message = "Category not found" });
+
+            _db.Catagories.Remove(category);
+            await _db.SaveChangesAsync();
+
+            return Json(new { success = true, message = "Category deleted successfully" });
+        }
+
+
     }
 }
