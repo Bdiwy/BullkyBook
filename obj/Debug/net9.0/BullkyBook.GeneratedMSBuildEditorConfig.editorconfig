@@ -32,12 +32,20 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/OpenSourceProjects/Random-Projects/c\#/BullkyBook/Views/Category/Index copy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXggY29weS5jc2h0bWw=
+[D:/OpenSourceProjects/Random-Projects/c\#/BullkyBook/Views/Category/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/OpenSourceProjects/Random-Projects/c\#/BullkyBook/Views/Category/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/OpenSourceProjects/Random-Projects/c\#/BullkyBook/Views/Category/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/OpenSourceProjects/Random-Projects/c\#/BullkyBook/Views/componants/deletePopup.csHtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcY29tcG9uYW50c1xkZWxldGVQb3B1cC5jc0h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/OpenSourceProjects/Random-Projects/c\#/BullkyBook/Views/Home/Index.cshtml]

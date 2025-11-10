@@ -35,5 +35,38 @@ namespace BullkyBook.Controllers
             return View("Create", category);
         }
 
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || id == 0)
+                return NotFound();
+            var category = await  _db.Catagories.FindAsync(id);
+            if (category == null)
+                return NotFound();
+            return View(category);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || id == 0)
+                return NotFound();
+            var category = await _db.Catagories.FindAsync(id);
+            if (category == null)
+                return NotFound();
+            return View(category);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Catagories.Update(category);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Edit", category);
+        }
+
     }
 }
