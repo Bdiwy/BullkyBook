@@ -52,7 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return isJson ? res.json() : { success: false, message: 'Unexpected response' };
         })
         .then(data => {
+            console.log(data);
+            
             if(data.success) {
+                console.log("sdsddsdsfs");
+                
 
                 // Close modal
                 const modalInstance = bootstrap.Modal.getInstance(deleteModal);
@@ -64,13 +68,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Show success alert
                 const alertDiv = document.createElement('div');
-                alertDiv.className = 'alert alert-success alert-dismissible fade show';
+                alertDiv.className = 'alert alert-dark alert-dismissible fade show';
                 alertDiv.role = 'alert';
                 alertDiv.innerHTML = `
                     ${data.message}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 `;
-                document.querySelector('.container').prepend(alertDiv);
+                document.querySelector('.alertMessage').prepend(alertDiv);
 
                 // Auto-dismiss success alert after 2 seconds
                 setTimeout(() => {

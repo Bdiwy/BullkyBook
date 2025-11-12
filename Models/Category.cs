@@ -9,10 +9,15 @@ namespace BullkyBook.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         public string? Name { get; set; }
+
         [Column("DisbplayOrder")]
         public int DisbplayOrder { get; set; }
+
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
+
+        public ICollection<Product>? Product {get;set;}
     }
 }
