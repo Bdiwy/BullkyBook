@@ -62,13 +62,13 @@
                                 <td>@obj.CreatedDateTime.ToString("yyyy-MM-dd HH:mm")</td>
                                 <td>
                                     <div class="d-flex gap-2 flex-wrap">
-                                        <a asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-warning btn-sm">
+                                        <a asp-action="Edit" asp-route-id="@obj.Id" class="btn">
                                             <i class="bi bi-pencil-square"></i> Edit
                                         </a>
-                                        <a asp-action="Details" asp-route-id="@obj.Id" class="btn btn-success btn-sm">
+                                        <a asp-action="Details" asp-route-id="@obj.Id" class="btn">
                                             <i class="bi bi-journal-text"></i> Details
                                         </a>
-                                        <button type="button" class="btn btn-danger btn-sm btn-delete"
+                                        <button type="button" class="btn"
                                             data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@obj.Id"
                                             data-name="@obj.Name">
                                             <i class="bi bi-trash"></i> Delete
