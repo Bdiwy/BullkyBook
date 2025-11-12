@@ -1,0 +1,116 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_LayoutWithSidebar";
+}
+<div class="container-fluid">
+    <h1 class="my-4">Welcome to the Dashboard</h1>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Products</h5>
+                    <p class="card-text" id="totalProducts">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Categories</h5>
+                    <p class="card-text" id="totalCategories">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Products in Stock</h5>
+                    <p class="card-text" id="productsInStock">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Low Stock Products</h5>
+                    <p class="card-text" id="lowStock">0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="productsPerCategoryChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="stockDistributionChart"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Dummy data for static analysis
+        const totalProducts = 120;
+        const totalCategories = 5;
+        const productsInStock = 95;
+        const lowStock = 10;
+
+        document.getElementById('totalProducts').innerText = totalProducts;
+        document.getElementById('totalCategories').innerText = totalCategories;
+        document.getElementById('productsInStock').innerText = productsInStock;
+        document.getElementById('lowStock').innerText = lowStock;
+
+        // Products per Category chart
+        const ctx1 = document.getElementById('productsPerCategoryChart').getContext('2d');
+        const productsPerCategoryChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Electronics', 'Clothing', 'Food', 'Books', 'Other'],
+                datasets: [{
+                    label: 'Products per Category',
+                    data: [30, 25, 20, 15, 30],
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Products per Category' }
+                }
+            }
+        });
+
+        // Stock Distribution pie chart
+        const ctx2 = document.getElementById('stockDistributionChart').getContext('2d');
+        const stockDistributionChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['In Stock', 'Low Stock', 'Out of Stock'],
+                datasets: [{
+                    label: 'Stock Distribution',
+                    data: [95, 10, 15],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(255, 99, 132, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    title: { display: true, text: 'Stock Distribution' }
+                }
+            }
+        });
+    </script>
+}
