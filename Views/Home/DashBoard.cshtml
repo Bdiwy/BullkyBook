@@ -39,15 +39,63 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Revenue</h5>
+                    <p class="card-text" id="totalRevenue">$0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Average Price</h5>
+                    <p class="card-text" id="averagePrice">$0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Out of Stock Products</h5>
+                    <p class="card-text" id="outOfStock">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-light text-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Top Selling Category</h5>
+                    <p class="card-text" id="topCategory">None</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Charts -->
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-md-6">
             <canvas id="productsPerCategoryChart"></canvas>
         </div>
         <div class="col-md-6">
             <canvas id="stockDistributionChart"></canvas>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <canvas id="salesOverTimeChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="topProductsChart"></canvas>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <canvas id="revenueByCategoryChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="stockLevelsChart"></canvas>
         </div>
     </div>
 </div>
@@ -60,11 +108,19 @@
         const totalCategories = 5;
         const productsInStock = 95;
         const lowStock = 10;
+        const totalRevenue = 15000;
+        const averagePrice = 125;
+        const outOfStock = 15;
+        const topCategory = 'Electronics';
 
         document.getElementById('totalProducts').innerText = totalProducts;
         document.getElementById('totalCategories').innerText = totalCategories;
         document.getElementById('productsInStock').innerText = productsInStock;
         document.getElementById('lowStock').innerText = lowStock;
+        document.getElementById('totalRevenue').innerText = `$${totalRevenue}`;
+        document.getElementById('averagePrice').innerText = `$${averagePrice}`;
+        document.getElementById('outOfStock').innerText = outOfStock;
+        document.getElementById('topCategory').innerText = topCategory;
 
         // Products per Category chart
         const ctx1 = document.getElementById('productsPerCategoryChart').getContext('2d');
@@ -109,6 +165,101 @@
                 plugins: {
                     legend: { position: 'bottom' },
                     title: { display: true, text: 'Stock Distribution' }
+                }
+            }
+        });
+
+        // Sales Over Time line chart
+        const ctx3 = document.getElementById('salesOverTimeChart').getContext('2d');
+        const salesOverTimeChart = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Sales Over Time',
+                    data: [1200, 1500, 1800, 1400, 1600, 2000],
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Sales Over Time' }
+                }
+            }
+        });
+
+        // Top Products bar chart
+        const ctx4 = document.getElementById('topProductsChart').getContext('2d');
+        const topProductsChart = new Chart(ctx4, {
+            type: 'bar',
+            data: {
+                labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product E'],
+                datasets: [{
+                    label: 'Top Products by Sales',
+                    data: [500, 400, 300, 200, 100],
+                    backgroundColor: 'rgba(255, 159, 64, 0.7)'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Top 5 Products by Sales' }
+                }
+            }
+        });
+
+        // Revenue by Category pie chart
+        const ctx5 = document.getElementById('revenueByCategoryChart').getContext('2d');
+        const revenueByCategoryChart = new Chart(ctx5, {
+            type: 'pie',
+            data: {
+                labels: ['Electronics', 'Clothing', 'Food', 'Books', 'Other'],
+                datasets: [{
+                    label: 'Revenue by Category',
+                    data: [5000, 4000, 3000, 2000, 1000],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    title: { display: true, text: 'Revenue by Category' }
+                }
+            }
+        });
+
+        // Stock Levels radar chart
+        const ctx6 = document.getElementById('stockLevelsChart').getContext('2d');
+        const stockLevelsChart = new Chart(ctx6, {
+            type: 'radar',
+            data: {
+                labels: ['Electronics', 'Clothing', 'Food', 'Books', 'Other'],
+                datasets: [{
+                    label: 'Stock Levels by Category',
+                    data: [25, 20, 15, 10, 25],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Stock Levels by Category' }
                 }
             }
         });
