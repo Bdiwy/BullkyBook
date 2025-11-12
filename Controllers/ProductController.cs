@@ -33,6 +33,11 @@ public class ProductController : Controller
         return View(products);
     }
 
+    public IActionResult Create()
+    {
+        ViewBag.Categories = _db.Catagories.OrderBy(c => c.Name).ToList();
+        return View();
+    }
 
 
 
