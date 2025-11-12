@@ -12,8 +12,8 @@ Layout = "_LayoutWithSidebar";
                 <h1 style="font-weight: bold;">Category Details</h1>
             </div>
             <hr />
-            @* <div class="card mb-4"> *@
-                @* <div class="card-body"> *@
+            <div class="card mb-4">
+                <div class="card-body">
                     <a asp-action="Index" class="btn btn-dark mb-4">Back To Category</a>
                     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mb-4">Edit Category</a>
                     <hr />
@@ -27,8 +27,8 @@ Layout = "_LayoutWithSidebar";
                         <dt class="col-sm-3">Created Date:</dt>
                         <dd class="col-sm-9">@Model.CreatedDateTime.ToString("yyyy-MM-dd HH:mm")</dd>
                     </dl>
-                @* </div> *@
-            @* </div> *@
+                </div>
+            </div>
         </div>
     </div>
 </div>
