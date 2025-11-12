@@ -39,6 +39,21 @@ public class ProductController : Controller
         return View();
     }
 
+    public IActionResult Store(Product? product)
+    {
+        if(ModelState.IsValid)
+        {
+            _db.Products.Add(product);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return View("Create", product);
+        }
+
+    }
+
 
 
 

@@ -33,4 +33,17 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    [Route("notfound", Name = "notfound")]  
+    public IActionResult NotFound()
+    {
+        Response.StatusCode = 404; 
+        return View();             
+    }
+
+    [Route("boom")]
+    public IActionResult Boom()
+    {
+        throw new InvalidOperationException("Test 500 – something went wrong!");
+    }
 }
