@@ -402,6 +402,118 @@ footer {
   }
 }
 
+/* Table Action Buttons - Dark Theme Styling */
+.table .btn-sm,
+.table a.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 0.4rem;
+  border: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.table .btn-warning,
+.table a.btn-warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
+}
+
+.table .btn-warning:hover,
+.table a.btn-warning:hover {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(245, 158, 11, 0.4);
+}
+
+.table .btn-success,
+.table a.btn-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+}
+
+.table .btn-success:hover,
+.table a.btn-success:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
+}
+
+.table .btn-danger,
+.table a.btn-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+}
+
+.table .btn-danger:hover,
+.table a.btn-danger:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4);
+}
+
+.table .btn:active,
+.table a.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Table styling for dark theme */
+.table {
+  color: #fff;
+  background-color: transparent;
+}
+
+.table thead th {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+  padding: 1rem 0.75rem;
+}
+
+.table tbody td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.75rem;
+  vertical-align: middle;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.table-bordered {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table-bordered thead th,
+.table-bordered tbody td {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Card styling for dark theme */
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+}
+
+.card-body {
+  background-color: transparent;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .hero-section {
@@ -419,5 +531,10 @@ footer {
   
   .card-body {
     padding: 1rem;
+  }
+
+  .table .btn-sm {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
   }
 }
