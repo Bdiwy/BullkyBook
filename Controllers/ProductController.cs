@@ -2,6 +2,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using BullkyBook.Models;
 using DataBase;
+using X.PagedList;
+using Microsoft.EntityFrameworkCore;
 
 namespace BullkyBook.Controllers;
 
@@ -15,9 +17,19 @@ public class ProductController : Controller
     }
 
 
-    public IActionResult Index()
+    public IActionResult Index(int? page, int? pageSize)
     {
-        var products = _db.Products.ToList();
+        int pageNumber = page ?? 1;
+        int currentPageSize = pageSize ?? 5;
+
+        var products = _db.Products
+                                    .Include(p => p.Category)
+                                    .OrderBy(c => c.Id)
+                                    .ToPagedList(pageNumber, currentPageSize);
+
+        ViewBag.PageSize = currentPageSize;
+        ViewBag.PageSizes = new List<int> { 3, 5, 8, 10, 15, 20, 25, 30, 35, 40, 50, 60, 100 };
+
         return View(products);
     }
 
