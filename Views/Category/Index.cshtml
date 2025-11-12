@@ -15,27 +15,28 @@
             </div>
 
             <hr />
+            <div class="d-flex justify-content-end align-items-center mb-3">
+                <div>
+                    <label for="pageSize" class="form-label me-2">Rows per page:</label>
+                    <select id="pageSize" class="form-select d-inline-block">
+                        @foreach (var size in ViewBag.PageSizes as List<int>)
+                            {
+                            if (size == ViewBag.PageSize)
+                            {
+                            <option value="@size" selected>@size</option>
+                            }
+                            else
+                            {
+                            <option value="@size">@size</option>
+                            }
+                            }
+                    </select>
+                </div>
+            </div>
+            <div class="card mb-4">
                 <div class="card-body">
-                    <div class="d-flex justify-content-end align-items-center mb-3">
-                        <div>
-                            <label for="pageSize" class="form-label me-2">Rows per page:</label>
-                            <select id="pageSize" class="form-select d-inline-block">
-                                @foreach (var size in ViewBag.PageSizes as List<int>)
-                                    {
-                                    if (size == ViewBag.PageSize)
-                                    {
-                                    <option value="@size" selected>@size</option>
-                                    }
-                                    else
-                                    {
-                                    <option value="@size">@size</option>
-                                    }
-                                    }
-                            </select>
-                        </div>
-                    </div>
 
-                    <table class="table table-bordered table-dark table-hover" style="width: 100%;">
+                    <table class="table table-bordered" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -61,14 +62,14 @@
                                 <td>@obj.CreatedDateTime.ToString("yyyy-MM-dd HH:mm")</td>
                                 <td>
                                     <div class="d-flex gap-2 flex-wrap">
-                                        <a asp-action="Edit" class="btn btn-warning btn-sm"
-                                            asp-route-id="@obj.Id">Edit</a>
-                                        <a asp-action="Details" class="btn btn-success btn-sm"
-                                            asp-route-id="@obj.Id">Details</a>
+                                        <button asp-action="Edit" class="btn btn-warning btn-sm"
+                                            asp-route-id="@obj.Id"><i class="bi bi-pencil-square"></i>Edit</button>
+                                        <button type="button"  class="btn btn-success btn-sm" asp-action="Details"
+                                            asp-route-id="@obj.Id"><i class="bi bi-journal-text"></i>Details</button>
                                         <button type="button" class="btn btn-danger btn-sm btn-delete"
                                             data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@obj.Id"
                                             data-name="@obj.Name">
-                                            Delete
+                                            <i class="bi bi-trash"></i> Delete
                                         </button>
                                     </div>
                                 </td>
@@ -77,18 +78,19 @@
                         </tbody>
                     </table>
 
-                    <div class="d-flex justify-content-center mt-3">
-                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.PageSize
-                        }),
-                        new PagedListRenderOptions
-                        {
-                        LiElementClasses = new[] { "page-item" },
-                        PageClasses = new[] { "page-link" }
-                        })
-                    </div>
                 </div>
+            </div>
         </div>
     </div>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.PageSize
+        }),
+        new PagedListRenderOptions
+        {
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" }
+        })
     </div>
 
     @await Html.PartialAsync("_DeleteModal")

@@ -21,6 +21,7 @@ body {
   min-height: 100vh;
 }
 
+
 main {
   flex: 1;
 }
@@ -191,55 +192,6 @@ footer {
   font-size: 1.125rem;
 }
 
-/* Table button spacing */
-table .btn {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
-  white-space: nowrap;
-}
-
-/* Table styling */
-.table {
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.table thead th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.5px;
-  border-bottom: 2px solid #dee2e6;
-  padding: 1rem;
-  color: #495057;
-}
-
-.table tbody td {
-  padding: 1rem;
-  vertical-align: middle;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.table tbody tr:hover {
-  background-color: #f8f9fa;
-  transition: background-color 0.2s ease;
-}
-
-.table-bordered {
-  border: 1px solid #dee2e6;
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: rgba(0, 0, 0, 0.02);
-}
-
-.table-striped tbody tr:nth-of-type(odd):hover {
-  background-color: #f8f9fa;
-}
-
 /* Form controls styling */
 .form-control, .form-select {
   border-radius: 0.5rem;
@@ -292,7 +244,7 @@ table .btn {
 
 .sidebar {
   width: 260px;
-  background: linear-gradient(180deg, #343a40 0%, #212529 100%);
+  background: linear-gradient(180deg, #6f42c1 0%, #ea39b8 100%);
   color: #fff;
   position: fixed;
   top: 56px;
@@ -457,20 +409,5 @@ table .btn {
   
   .card-body {
     padding: 1rem;
-  }
-  
-  table .btn {
-    margin: 0.25rem 0;
-    display: block;
-    width: 100%;
-  }
-  
-  .table {
-    font-size: 0.875rem;
-  }
-  
-  .table thead th,
-  .table tbody td {
-    padding: 0.75rem 0.5rem;
   }
 }

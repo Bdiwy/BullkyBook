@@ -1,0 +1,26 @@
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: #f1f1f1;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.card h4 {
+    color: #fff;
+}
+
+.card a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
