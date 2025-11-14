@@ -1,4 +1,5 @@
 using BullkyBook.Models;
+using BullkyBook.Services;
 using DataBase;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
@@ -8,9 +9,12 @@ namespace BullkyBook.Controllers
     {
         private readonly ApplicationDbContext _db;
 
-        public CategoryController(ApplicationDbContext db)
+        private readonly BookCategoryService _bookService ; 
+
+        public CategoryController(ApplicationDbContext db , BookCategoryService bookService)
         {
             _db = db;
+            this._bookService = bookService ; 
         }
 
         
@@ -95,6 +99,27 @@ namespace BullkyBook.Controllers
             return Json(new { success = true, message = "Category deleted successfully" });
         }
 
-
+        [HttpGet]
+        [Route("api/fetch")]
+        public async Task<IActionResult> ImportCategories()
+        {
+            try
+            {
+                bool success = await _bookService.FeatchAndImport();
+                
+                if (success)
+                {
+                    return Json(new { success = true, message = "Categories imported successfully" });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "No new categories to import or import failed" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Error: {ex.Message}" });
+            }
+        }
     }
 }
