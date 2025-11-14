@@ -39,11 +39,11 @@ public class ProductController : Controller
         return View();
     }
 
-    public IActionResult Store(Product? product)
+    public async Task<IActionResult>  Store(Product? product)
     {
         if(ModelState.IsValid)
         {
-            _db.Products.Add(product);
+            await _db.Products.AddAsync(product);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -51,8 +51,20 @@ public class ProductController : Controller
         {
             return View("Create", product);
         }
-
     }
+
+
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null || id == 0)
+            return NotFound();
+        var product = await _db.Products.FindAsync(id);
+        if(product == null)
+            return NotFound();
+        return View(product);
+    }
+
+
 
 
 
