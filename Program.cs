@@ -11,8 +11,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
-// Register BookCategoryService
+// Register BookCategoryService and WeatherService
 builder.Services.AddScoped<BookCategoryService>();
+builder.Services.AddScoped<WeatherService>();
 
 var app = builder.Build();
 

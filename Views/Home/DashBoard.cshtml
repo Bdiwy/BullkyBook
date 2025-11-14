@@ -14,7 +14,7 @@
                         <h4 id="weather_city" class="fw-bold mb-1">Cairo</h4>
                         <p id="weather_date" class="text-muted mb-3">Loading...</p>
 
-                        <img src="https://openweathermap.org/img/wn/01n.png" width="80">
+                        <img id="weather_icon" src="https://openweathermap.org/img/wn/01n.png" width="80" />
 
                         <h1 id="weather_temp" class="fw-bold mb-2">--°C</h1>
                         <p id="weather_desc" class="lead mb-3">---</p>
@@ -258,34 +258,34 @@
     </script>
 }
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-        const city = "Cairo";
-        const apiKey = "YOUR_API_KEY";
+    fetch(`/api/weather-now`)
+        .then(res => res.json())
+        .then(data => {
 
-        fetch(`/weatch-now`)
-            .then(res => res.json())
-            .then(data => {
-
-                // UI Update
-                document.getElementById("weather_city").innerText = data.name;
-
-                const date = new Date();
-                document.getElementById("weather_date").innerText = date.toDateString();
-
-                document.getElementById("weather_temp").innerText = Math.round(data.main.temp) + "°C";
-                document.getElementById("weather_desc").innerText = data.weather[0].description;
-
-                document.getElementById("weather_icon").src =
-                    `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-
-                document.getElementById("weather_humidity").innerText = data.main.humidity + "%";
-                document.getElementById("weather_wind").innerText = data.wind.speed + " km/h";
-                document.getElementById("weather_feels").innerText = data.main.feels_like + "°C";
-            })
-            .catch(() => {
+            if (!data.success) {
                 document.getElementById("weather_desc").innerText = "Unable to load weather";
-            });
+                return;
+            }
 
-    });
+            document.getElementById("weather_city").innerText = data.city;
+            document.getElementById("weather_date").innerText = data.date;
+
+            document.getElementById("weather_temp").innerText = Math.round(data.temp) + "°C";
+            document.getElementById("weather_desc").innerText = data.desc;
+
+            document.getElementById("weather_icon").src =
+                `https://openweathermap.org/img/wn/${data.icon}@@2x.png`;
+
+            document.getElementById("weather_humidity").innerText = "--%"; // forecast doesn't return humidity
+            document.getElementById("weather_wind").innerText = "-- km/h";
+            document.getElementById("weather_feels").innerText = Math.round(data.feels) + "°C";
+        })
+        .catch(() => {
+            document.getElementById("weather_desc").innerText = "Unable to load weather";
+        });
+
+});
+
 </script>
