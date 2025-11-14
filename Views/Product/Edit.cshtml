@@ -16,6 +16,7 @@
         <a asp-action="Index" class="btn btn-dark mb-4">Back To Product</a>
 
         <form asp-action="Update" method="post">
+            <input type="hidden" asp-for="Id" />
             <div class="mb-3">
                 <label asp-for="Name" class="form-label"></label>
                 <input asp-for="Name" class="form-control" required />
@@ -30,7 +31,7 @@
             
             <div class="mb-3">
                 <label asp-for="CategoryId" class="form-label"></label>
-                <select asp-for="CategoryId" class="form-select" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
+                <select asp-for="CategoryId" class="form-select" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name", Model.CategoryId))">
                     <option value="">-- Select Category --</option>
                 </select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>

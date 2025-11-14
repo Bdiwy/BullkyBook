@@ -68,6 +68,28 @@ public class ProductController : Controller
     }
 
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Update(Product model)
+    {
+        if (!ModelState.IsValid)
+        {
+            ViewBag.Categories = await _db.Catagories.OrderBy(c => c.Name).ToListAsync();
+            return View("Edit", model);
+        }
+
+        var product = await _db.Products.FindAsync(model.Id);
+        if (product == null) return NotFound();
+
+        product.Name = model.Name;
+        product.QtyInStock = model.QtyInStock;
+        product.CategoryId = model.CategoryId;
+
+        await _db.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
+
+
 
 
 
