@@ -1,0 +1,45 @@
+@model Product
+
+@{
+    ViewData["Title"] = "Create Product";
+    Layout = "_LayoutWithSidebar";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div style="text-align:center; size:20px; padding:10px; border-radius:5px; margin-bottom:10px;">
+                <h1 style="font-weight: bold;">Product Create</h1>
+            </div>
+            <hr />
+            <div class="card mb-4">
+                <div class="card-body">
+        <a asp-action="Index" class="btn btn-dark mb-4">Back To Product</a>
+
+        <form asp-action="Update" method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="QtyInStock" class="form-label"></label>
+                <input asp-for="QtyInStock" class="form-control" required />
+                <span asp-validation-for="QtyInStock" class="text-danger"></span>
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="form-label"></label>
+                <select asp-for="CategoryId" class="form-select" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
+                    <option value="">-- Select Category --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

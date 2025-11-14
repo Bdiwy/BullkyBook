@@ -58,7 +58,10 @@ public class ProductController : Controller
     {
         if (id == null || id == 0)
             return NotFound();
-        var product = await _db.Products.FindAsync(id);
+        var product = await _db.Products
+                                .Include(p => p.Category)
+                                .FirstOrDefaultAsync(p => p.Id == id);
+        ViewBag.Categories = await _db.Catagories.OrderBy(c => c.Name).ToListAsync();
         if(product == null)
             return NotFound();
         return View(product);
