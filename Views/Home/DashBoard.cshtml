@@ -5,6 +5,40 @@
 
 <div class="container-fluid">
     <h1 class="my-4">Welcome to the Dashboard</h1>
+    <!-- Weather Card -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card shadow-lg border-0" style="border-radius: 20px;">
+                    <div class="card-body text-center">
+
+                        <h4 id="weather_city" class="fw-bold mb-1">Cairo</h4>
+                        <p id="weather_date" class="text-muted mb-3">Loading...</p>
+
+                        <img src="https://openweathermap.org/img/wn/01n.png" width="80">
+
+                        <h1 id="weather_temp" class="fw-bold mb-2">--°C</h1>
+                        <p id="weather_desc" class="lead mb-3">---</p>
+
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <p class="small text-muted mb-1">Humidity</p>
+                                <h6 id="weather_humidity">--%</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="small text-muted mb-1">Wind</p>
+                                <h6 id="weather_wind">-- km/h</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="small text-muted mb-1">Feels</p>
+                                <h6 id="weather_feels">--°C</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     <!-- Stats Cards -->
     <div class="row mb-4">
@@ -223,3 +257,35 @@
         });
     </script>
 }
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const city = "Cairo";
+        const apiKey = "YOUR_API_KEY";
+
+        fetch(`/weatch-now`)
+            .then(res => res.json())
+            .then(data => {
+
+                // UI Update
+                document.getElementById("weather_city").innerText = data.name;
+
+                const date = new Date();
+                document.getElementById("weather_date").innerText = date.toDateString();
+
+                document.getElementById("weather_temp").innerText = Math.round(data.main.temp) + "°C";
+                document.getElementById("weather_desc").innerText = data.weather[0].description;
+
+                document.getElementById("weather_icon").src =
+                    `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+
+                document.getElementById("weather_humidity").innerText = data.main.humidity + "%";
+                document.getElementById("weather_wind").innerText = data.wind.speed + " km/h";
+                document.getElementById("weather_feels").innerText = data.main.feels_like + "°C";
+            })
+            .catch(() => {
+                document.getElementById("weather_desc").innerText = "Unable to load weather";
+            });
+
+    });
+</script>
