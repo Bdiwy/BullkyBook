@@ -2,47 +2,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const deleteModal = document.getElementById('deleteModal');
     const deleteForm = document.getElementById('deleteForm');
-    let currentCategoryId = null;
+    let currentId = null;
 
     if(!deleteModal || !deleteForm) return;
 
-    // Show modal and fill data
+    const pathParts = window.location.pathname.split('/').filter(p => p.length > 0);
+    const controllerName = pathParts[0] || '';
+
     deleteModal.addEventListener('show.bs.modal', function(e) {
         const button = e.relatedTarget;
-        currentCategoryId = button.getAttribute('data-id');
-        const categoryName = button.getAttribute('data-name');
+        currentId = button.getAttribute('data-id');
+        const currentName = button.getAttribute('data-name');
 
-        document.getElementById('categoryName').textContent = categoryName;
-        // Post to action without path id; pass id in body to match controller binding
-        deleteForm.action = '/Category/Delete';
+        document.getElementById('nameOFItem').textContent = currentName;
+        deleteForm.action = '/' + controllerName + '/Delete';
     });
 
-    // Submit form via fetch
     deleteForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
         const token = deleteForm.querySelector('input[name="__RequestVerificationToken"]').value;
 
-        // Build form-encoded body with antiforgery token and id for robustness
         const formBody = new URLSearchParams();
         formBody.append('__RequestVerificationToken', token);
-        if (currentCategoryId) {
-            formBody.append('id', currentCategoryId);
-        }
+        if (currentId) formBody.append('id', currentId);
 
         fetch(deleteForm.action, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                // Also pass token via header for compatibility
                 'RequestVerificationToken': token
             },
             credentials: 'same-origin',
             body: formBody.toString()
         })
         .then(async res => {
-            // Attempt to parse JSON; if not OK, throw with server text to show useful error
             const contentType = res.headers.get('Content-Type') || '';
             const isJson = contentType.includes('application/json');
             if (!res.ok) {
@@ -52,21 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
             return isJson ? res.json() : { success: false, message: 'Unexpected response' };
         })
         .then(data => {
-            console.log(data);
-            
             if(data.success) {
-                console.log("sdsddsdsfs");
-                
-
-                // Close modal
                 const modalInstance = bootstrap.Modal.getInstance(deleteModal);
                 modalInstance.hide();
 
-                // Remove table row
-                const row = document.querySelector('button[data-id="'+currentCategoryId+'"]').closest('tr');
+                const row = document.querySelector('button[data-id="'+currentId+'"]').closest('tr');
                 if(row) row.remove();
 
-                // Show success alert
                 const alertDiv = document.createElement('div');
                 alertDiv.className = 'alert alert-dark alert-dismissible fade show';
                 alertDiv.role = 'alert';
@@ -76,15 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 document.querySelector('.alertMessage').prepend(alertDiv);
 
-                // Auto-dismiss success alert after 2 seconds
                 setTimeout(() => {
-                    try {
-                        const bsAlert = bootstrap.Alert.getOrCreateInstance(alertDiv);
-                        bsAlert.close();
-                    } catch(_) {
-                        // Fallback: remove element
-                        alertDiv.remove();
-                    }
+                    try { bootstrap.Alert.getOrCreateInstance(alertDiv).close(); } catch(_) { alertDiv.remove(); }
                 }, 2000);
 
             } else {
@@ -93,8 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(err => {
             console.error('Delete error:', err);
-            const message = (err && err.message) ? err.message : 'Something went wrong!';
-            alert(message);
+            alert(err?.message || 'Something went wrong!');
         });
     });
 

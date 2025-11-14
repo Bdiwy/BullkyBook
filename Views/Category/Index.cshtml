@@ -77,8 +77,11 @@
                                     <a asp-action="Details" asp-route-id="@obj.Id" class="btn">
                                         <i class="bi bi-journal-text"></i> Details
                                     </a>
-                                    <button type="button" class="btn" data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal" data-id="@obj.Id" data-name="@obj.Name">
+                                    <button type="button" class="btn" 
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal" 
+                                            data-id="@obj.Id" 
+                                            data-name="@obj.Name">
                                         <i class="bi bi-trash"></i> Delete
                                     </button>
                                 </div>
