@@ -205,12 +205,6 @@ footer {
   box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
 }
 
-.form-label {
-  font-weight: 500;
-  color: #495057;
-  margin-bottom: 0.5rem;
-}
-
 /* Modal styling - Dark Theme */
 .modal-content {
   border-radius: 0.75rem;
