@@ -9,9 +9,16 @@
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0"><i class="bi bi-tags"></i> Category List</h2>
-            <a asp-action="Create" class="btn btn-dark">
-                <i class="bi bi-plus-circle"></i> Create New Category
-            </a>
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-success" 
+                        data-bs-toggle="modal"
+                        data-bs-target="#importModal">
+                    <i class="bi bi-download"></i> Import Categories
+                </button>
+                <a asp-action="Create" class="btn btn-dark">
+                    <i class="bi bi-plus-circle"></i> Create New Category
+                </a>
+            </div>
         </div>
 
         <hr />
@@ -107,7 +114,9 @@
 </div>
 
 @await Html.PartialAsync("_DeleteModal")
+@await Html.PartialAsync("_ImportModal")
 <script src="~/js/deleteModal.js"></script>
+<script src="~/js/importModal.js"></script>
 
 <script>
     document.getElementById("pageSize").addEventListener("change", function () {
