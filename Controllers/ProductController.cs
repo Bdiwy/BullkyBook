@@ -4,6 +4,7 @@ using BullkyBook.Models;
 using DataBase;
 using X.PagedList;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BullkyBook.Controllers;
 
@@ -49,6 +50,7 @@ public class ProductController : Controller
         }
         else
         {
+            ViewBag.Categories = _db.Catagories.OrderBy(c => c.Name).ToList();
             return View("Create", product);
         }
     }
@@ -89,6 +91,18 @@ public class ProductController : Controller
         return RedirectToAction("Index");
     }
 
+
+    public async Task<IActionResult> Details(int? id)
+    {
+        if(id == null || id == 0 ) return NotFound();
+        var product = await _db.Products.Include(p => p.Category).FirstOrDefaultAsync(p=> p.Id == id);
+        if(product == null) return NotFound();
+        return View("Details",product); 
+    }
+
+
+
+    
 
 
 

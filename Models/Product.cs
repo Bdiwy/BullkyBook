@@ -12,8 +12,10 @@ namespace BullkyBook.Models
         [Required]
         public string? Name { get; set; }
 
+        [Required]
         public int QtyInStock { get; set; }
 
+        [Required]
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
 
