@@ -100,15 +100,15 @@ public class ProductController : Controller
         return View("Details",product); 
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var item = await _db.Products.FindAsync(id);
+        if (item == null) return Json(new { success = false, message = "Product not found!" });
 
-
-    
-
-
-
-
-
-
-
-
+        _db.Products.Remove(item);
+        await _db.SaveChangesAsync();
+        return Json(new { success = true, message = "Product deleted successfully!" });
+    }
 }
