@@ -1,0 +1,182 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "_Layout"; // Use regular layout for landing page (no sidebar)
+}
+
+<!-- Hero Section -->
+<section class="hero-section bg-gradient text-white py-5 mb-5" style="background: linear-gradient(135deg, #e83283 0%, #686dc3 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="bi bi-book"></i> Welcome to BullkyBook
+                </h1>
+                <p class="lead mb-4">
+                    Your comprehensive solution for managing categories and items. 
+                    Organize, track, and manage your inventory with ease.
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a asp-controller="Category" asp-action="Index" class="btn btn-light btn-lg">
+                        <i class="bi bi-tags"></i> Manage Categories
+                    </a>
+                    <a asp-controller="Category" asp-action="Create" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-plus-circle"></i> Add New Category
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="bi bi-journal-bookmark" style="font-size: 15rem; opacity: 0.3;"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3"style="color:white;">Why Choose BullkyBook?</h2>
+            <p class=" text-white">Powerful features to streamline your inventory management</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-tags-fill text-primary" style="font-size: 3rem;"></i>
+                        </div>
+                        <h4 class="card-title fw-bold text-white">Category Management</h4>
+                        <p class="card-text text-muted">
+                            Organize your items into categories. Create, edit, and manage categories 
+                            with an intuitive interface.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-box-seam-fill text-success" style="font-size: 3rem;"></i>
+                        </div>
+                        <h4 class="card-title text-white fw-bold">Item Tracking</h4>
+                        <p class="card-text text-muted">
+                            Keep track of all your items. Add details, update information, 
+                            and maintain accurate records.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-speedometer2 text-info" style="font-size: 3rem;"></i>
+                        </div>
+                        <h4 class="card-title fw-bold text-white">Fast & Efficient</h4>
+                        <p class="card-text text-muted">
+                            Built with modern technology for speed and reliability. 
+                            Manage your inventory quickly and efficiently.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Actions Section -->
+<section class="quick-actions-section bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Quick Actions</h2>
+            <p class="text-muted">Get started with these common tasks</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 shadow-sm h-100 text-center">
+                    <div class="card-body p-4">
+                        <i class="bi bi-plus-circle-fill text-primary mb-3" style="font-size: 2.5rem;"></i>
+                        <h5 class="card-title">Create Category</h5>
+                        <p class="card-text text-muted small">Add a new category to organize your items</p>
+                        <a asp-controller="Category" asp-action="Create" class="btn btn-primary btn-sm">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 shadow-sm h-100 text-center">
+                    <div class="card-body p-4">
+                        <i class="bi bi-list-ul text-success mb-3" style="font-size: 2.5rem;"></i>
+                        <h5 class="card-title">View Categories</h5>
+                        <p class="card-text text-muted small">Browse and manage all your categories</p>
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-success btn-sm">
+                            View All
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 shadow-sm h-100 text-center">
+                    <div class="card-body p-4">
+                        <i class="bi bi-pencil-square text-warning mb-3" style="font-size: 2.5rem;"></i>
+                        <h5 class="card-title">Edit Items</h5>
+                        <p class="card-text text-muted small">Update category information and details</p>
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-warning btn-sm">
+                            Edit Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 shadow-sm h-100 text-center">
+                    <div class="card-body p-4">
+                        <i class="bi bi-search text-info mb-3" style="font-size: 2.5rem;"></i>
+                        <h5 class="card-title">Search & Filter</h5>
+                        <p class="card-text text-muted small">Find categories and items quickly</p>
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-info btn-sm">
+                            Search
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section (Optional - can be dynamic later) -->
+<section class="stats-section py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="p-4">
+                    <i class="bi bi-tags text-primary mb-3" style="font-size: 3rem;"></i>
+                    <h3 class="display-4 fw-bold text-primary">0</h3>
+                    <p class="text-white mb-0">Categories</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="p-4">
+                    <i class="bi bi-box-seam text-success mb-3" style="font-size: 3rem;"></i>
+                    <h3 class="display-4 fw-bold text-success">0</h3>
+                    <p class="text-white mb-0">Items</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4">
+                    <i class="bi bi-check-circle text-info mb-3" style="font-size: 3rem;"></i>
+                    <h3 class="display-4 fw-bold text-info">100%</h3>
+                    <p class="text-white mb-0">Organized</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

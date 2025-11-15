@@ -1,5 +1,6 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
 <!DOCTYPE html>
-<html lang="en">
+<html lang="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,15 +29,54 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                                <i class="bi bi-house"></i> Home
+                                <i class="bi bi-house"></i> @Localizer["Home"]
+                            </a>
+                        </li>
+                        &nbsp;
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('sidebarToggle').click();">
+                                <i class="bi bi-list"></i> @Localizer["Menu"]
                             </a>
                         </li>
                         &nbsp;
                         &nbsp;
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('sidebarToggle').click();">
-                                <i class="bi bi-list"></i> Menu
+                        <!-- Language Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-translate"></i> @Localizer["Language"]
                             </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+                                <li>
+                                    @{
+                                        var routeValues = new Dictionary<string, object>();
+                                        routeValues["culture"] = "en";
+                                        routeValues["controller"] = ViewContext.RouteData.Values["controller"] ?? "Home";
+                                        routeValues["action"] = ViewContext.RouteData.Values["action"] ?? "Index";
+                                        if (ViewContext.RouteData.Values.ContainsKey("id"))
+                                        {
+                                            routeValues["id"] = ViewContext.RouteData.Values["id"];
+                                        }
+                                    }
+                                    <a class="dropdown-item" href="@Url.RouteUrl("localized", routeValues)">
+                                        English
+                                    </a>
+                                </li>
+                                <li>
+                                    @{
+                                        var routeValuesAr = new Dictionary<string, object>();
+                                        routeValuesAr["culture"] = "ar";
+                                        routeValuesAr["controller"] = ViewContext.RouteData.Values["controller"] ?? "Home";
+                                        routeValuesAr["action"] = ViewContext.RouteData.Values["action"] ?? "Index";
+                                        if (ViewContext.RouteData.Values.ContainsKey("id"))
+                                        {
+                                            routeValuesAr["id"] = ViewContext.RouteData.Values["id"];
+                                        }
+                                    }
+                                    <a class="dropdown-item" href="@Url.RouteUrl("localized", routeValuesAr)">
+                                        عربي
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -61,5 +101,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
-

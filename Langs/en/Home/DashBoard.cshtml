@@ -1,0 +1,291 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_LayoutWithSidebar";
+}
+
+<div class="container-fluid">
+    <h1 class="my-4">Welcome to the Dashboard</h1>
+    <!-- Weather Card -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card shadow-lg border-0" style="border-radius: 20px;">
+                    <div class="card-body text-center">
+
+                        <h4 id="weather_city" class="fw-bold mb-1">Cairo</h4>
+                        <p id="weather_date" class="text-muted mb-3">Loading...</p>
+
+                        <img id="weather_icon" src="https://openweathermap.org/img/wn/01n.png" width="80" />
+
+                        <h1 id="weather_temp" class="fw-bold mb-2">--°C</h1>
+                        <p id="weather_desc" class="lead mb-3">---</p>
+
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <p class="small text-muted mb-1">Humidity</p>
+                                <h6 id="weather_humidity">--%</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="small text-muted mb-1">Wind</p>
+                                <h6 id="weather_wind">-- km/h</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="small text-muted mb-1">Feels</p>
+                                <h6 id="weather_feels">--°C</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Products</h5>
+                    <p class="card-text" id="totalProducts">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Categories</h5>
+                    <p class="card-text" id="totalCategories">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Products in Stock</h5>
+                    <p class="card-text" id="productsInStock">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Low Stock Products</h5>
+                    <p class="card-text" id="lowStock">0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extra Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Users</h5>
+                    <p class="card-text" id="totalUsers">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">New Orders</h5>
+                    <p class="card-text" id="newOrders">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Revenue</h5>
+                    <p class="card-text" id="revenue">$0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-light mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Shipments</h5>
+                    <p class="card-text" id="pendingShipments">0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <canvas id="productsPerCategoryChart"></canvas>
+        </div>
+        <div class="col-md-6 mb-4">
+            <canvas id="stockDistributionChart"></canvas>
+        </div>
+        <div class="col-md-6 mb-4">
+            <canvas id="salesLineChart"></canvas>
+        </div>
+        <div class="col-md-6 mb-4">
+            <canvas id="productTypePolarChart"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // ---------------------------
+        // Static Data for Dashboard
+        // ---------------------------
+        const totalProducts = 120;
+        const totalCategories = 5;
+        const productsInStock = 95;
+        const lowStock = 10;
+        const totalUsers = 50;
+        const newOrders = 20;
+        const revenue = 15000;
+        const pendingShipments = 8;
+
+        document.getElementById('totalProducts').innerText = totalProducts;
+        document.getElementById('totalCategories').innerText = totalCategories;
+        document.getElementById('productsInStock').innerText = productsInStock;
+        document.getElementById('lowStock').innerText = lowStock;
+        document.getElementById('totalUsers').innerText = totalUsers;
+        document.getElementById('newOrders').innerText = newOrders;
+        document.getElementById('revenue').innerText = "$" + revenue;
+        document.getElementById('pendingShipments').innerText = pendingShipments;
+
+        // ---------------------------
+        // Products per Category (Bar Chart)
+        // ---------------------------
+        const ctx1 = document.getElementById('productsPerCategoryChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Electronics', 'Clothing', 'Food', 'Books', 'Other'],
+                datasets: [{
+                    label: 'Products per Category',
+                    data: [30, 25, 20, 15, 30],
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Products per Category' }
+                }
+            }
+        });
+
+        // ---------------------------
+        // Stock Distribution (Doughnut)
+        // ---------------------------
+        const ctx2 = document.getElementById('stockDistributionChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['In Stock', 'Low Stock', 'Out of Stock'],
+                datasets: [{
+                    data: [95, 10, 15],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(255, 99, 132, 0.7)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    title: { display: true, text: 'Stock Distribution' }
+                }
+            }
+        });
+
+        // ---------------------------
+        // Monthly Sales Line Chart
+        // ---------------------------
+        const ctx3 = document.getElementById('salesLineChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Monthly Sales ($)',
+                    data: [2000, 2500, 1800, 3000, 2800, 3500],
+                    borderColor: 'rgba(255, 99, 132, 0.8)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true },
+                    title: { display: true, text: 'Monthly Sales' }
+                }
+            }
+        });
+
+        // ---------------------------
+        // Product Types Polar Area Chart
+        // ---------------------------
+        const ctx4 = document.getElementById('productTypePolarChart').getContext('2d');
+        new Chart(ctx4, {
+            type: 'polarArea',
+            data: {
+                labels: ['Electronics', 'Clothing', 'Food', 'Books', 'Other'],
+                datasets: [{
+                    data: [30, 25, 20, 15, 30],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    title: { display: true, text: 'Product Type Distribution' }
+                }
+            }
+        });
+    </script>
+}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    fetch(`/api/weather-now`)
+        .then(res => res.json())
+        .then(data => {
+
+            if (!data.success) {
+                document.getElementById("weather_desc").innerText = "Unable to load weather";
+                return;
+            }
+
+            document.getElementById("weather_city").innerText = data.city;
+            document.getElementById("weather_date").innerText = data.date;
+
+            document.getElementById("weather_temp").innerText = Math.round(data.temp) + "°C";
+            document.getElementById("weather_desc").innerText = data.desc;
+
+            document.getElementById("weather_icon").src =
+                `https://openweathermap.org/img/wn/${data.icon}@@2x.png`;
+
+            document.getElementById("weather_humidity").innerText = "--%"; // forecast doesn't return humidity
+            document.getElementById("weather_wind").innerText = "-- km/h";
+            document.getElementById("weather_feels").innerText = Math.round(data.feels) + "°C";
+        })
+        .catch(() => {
+            document.getElementById("weather_desc").innerText = "Unable to load weather";
+        });
+
+});
+
+</script>

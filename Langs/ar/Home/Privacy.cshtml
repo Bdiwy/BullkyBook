@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<style>
+    body {
+        background: linear-gradient(to bottom, #1a0033, #0b0220);
+        color: #e6e6e6;
+    }
+
+    .privacy-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        color: #f1f1f1;
+        transition: all 0.3s ease;
+    }
+
+    .privacy-card:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .privacy-card h4 {
+        color: #fff;
+    }
+
+    .privacy-card a {
+        color: #58a6ff;
+        text-decoration: none;
+    }
+
+    .privacy-card a:hover {
+        text-decoration: underline;
+    }
+
+    hr {
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card privacy-card shadow-lg">
+                <div class="card-body p-4">
+                    <h1 class="text-center mb-4 fw-bold">@ViewData["Title"]</h1>
+                    <hr />
+
+                    <section class="mb-4">
+                        <h4>1. Introduction</h4>
+                        <p>
+                            Welcome to <strong>Your Website Name</strong>. 
+                            We value your privacy and are committed to protecting your personal information. 
+                            This Privacy Policy explains how we collect, use, and protect your data.
+                        </p>
+                    </section>
+
+                    <section class="mb-4">
+                        <h4>2. Information We Collect</h4>
+                        <ul>
+                            <li>Personal information such as your name, email, and contact details.</li>
+                            <li>Usage data like your IP address, browser type, and pages visited.</li>
+                            <li>Cookies and similar tracking technologies to improve our service.</li>
+                        </ul>
+                    </section>
+
+                    <section class="mb-4">
+                        <h4>3. How We Use Your Information</h4>
+                        <ul>
+                            <li>Provide and maintain our services.</li>
+                            <li>Improve user experience and site performance.</li>
+                            <li>Send updates or promotional materials (only with your consent).</li>
+                        </ul>
+                    </section>
+
+                    <section class="mb-4">
+                        <h4>4. Data Protection</h4>
+                        <p>
+                            We implement strict security measures to protect your personal information 
+                            from unauthorized access, alteration, or disclosure.
+                        </p>
+                    </section>
+
+                    <section class="mb-4">
+                        <h4>5. Your Rights</h4>
+                        <ul>
+                            <li>Access and request a copy of your data.</li>
+                            <li>Request correction or deletion of your personal information.</li>
+                            <li>Withdraw consent for data processing at any time.</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h4>6. Contact Us</h4>
+                        <p>
+                            If you have any questions or concerns about our Privacy Policy, 
+                            please contact us at 
+                            <a href="mailto:privacy@yourwebsite.com">privacy@yourwebsite.com</a>.
+                        </p>
+                    </section>
+
+                    <hr />
+                    <p class="text-center small text-muted mb-0">
+                        &copy; @DateTime.Now.Year Your Website Name. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

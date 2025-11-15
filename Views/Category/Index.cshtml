@@ -1,22 +1,24 @@
 @model IPagedList<BullkyBook.Models.Category>
 
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Category Page";
+    ViewData["Title"] = Localizer["Category Page"];
     Layout = "_LayoutWithSidebar";
 }
 
 <div class="row">
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0"><i class="bi bi-tags"></i> Category List</h2>
+            <h2 class="mb-0"><i class="bi bi-tags"></i> @Localizer["Category List"]</h2>
             <div class="d-flex gap-2">
                 <button type="button" class="btn btn-success" 
                         data-bs-toggle="modal"
                         data-bs-target="#importModal">
-                    <i class="bi bi-download"></i> Import Categories
+                    <i class="bi bi-download"></i> @Localizer["Import Categories"]
                 </button>
                 <a asp-action="Create" class="btn btn-dark">
-                    <i class="bi bi-plus-circle"></i> Create New Category
+                    <i class="bi bi-plus-circle"></i> @Localizer["Create New Category"]
                 </a>
             </div>
         </div>
@@ -25,7 +27,7 @@
         <div class="alertMessage"></div>
         <div class="d-flex justify-content-end align-items-center mb-3">
             <div>
-                <label for="pageSize" class="form-label me-2" style="color:white;">Rows per page:</label>
+                <label for="pageSize" class="form-label me-2" style="color:white;">@Localizer["Rows per page:"]</label>
                 <select id="pageSize" class="form-select d-inline-block">
                     @foreach (var size in ViewBag.PageSizes as List<int>)
                     {
@@ -43,14 +45,13 @@
         </div>
         <div class="card mb-4">
             <div class="card-body">
-
                 <table class="table table-bordered" style="width: 100%;">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Display Order</th>
-                            <th>Date Time</th>
+                            <th>@Localizer["Name"]</th>
+                            <th>@Localizer["Display Order"]</th>
+                            <th>@Localizer["Date Time"]</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -61,51 +62,47 @@
                         @if (Model.Count == 0)
                         {
                             <tr>
-                                <td colspan="5" class="text-center text-danger">No categories available.</td>
+                                <td colspan="5" class="text-center text-danger">@Localizer["No categories available."]</td>
                             </tr>
                         }
                         @foreach (var obj in Model)
                         {
                             <tr class="align-middle">
                                 <td>@{
-                                    @count
-                                ;
+                                    @count;
                                     count++;
-                                }
-</td>
-                            <td>@obj.Name</td>
-                            <td>@obj.DisbplayOrder</td>
-                            <td>@obj.CreatedDateTime.ToString("yyyy-MM-dd HH:mm")</td>
-                            <td>
-                                <div class="d-flex gap-2 flex-wrap">
-                                    <a asp-action="Edit" asp-route-id="@obj.Id" class="btn">
-                                        <i class="bi bi-pencil-square"></i> Edit
-                                    </a>
-                                    <a asp-action="Details" asp-route-id="@obj.Id" class="btn">
-                                        <i class="bi bi-journal-text"></i> Details
-                                    </a>
-                                    <button type="button" class="btn" 
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal" 
-                                            data-id="@obj.Id" 
-                                            data-name="@obj.Name">
-                                        <i class="bi bi-trash"></i> Delete
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                                                }
+                                }</td>
+                                <td>@obj.Name</td>
+                                <td>@obj.DisbplayOrder</td>
+                                <td>@obj.CreatedDateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                                <td>
+                                    <div class="d-flex gap-2 flex-wrap">
+                                        <a asp-action="Edit" asp-route-id="@obj.Id" class="btn">
+                                            <i class="bi bi-pencil-square"></i> @Localizer["Edit"]
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@obj.Id" class="btn">
+                                            <i class="bi bi-journal-text"></i> @Localizer["Details"]
+                                        </a>
+                                        <button type="button" class="btn" 
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal" 
+                                                data-id="@obj.Id" 
+                                                data-name="@obj.Name">
+                                            <i class="bi bi-trash"></i> @Localizer["Delete"]
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
 </div>
-</div>
+
 <div class="d-flex justify-content-center mt-3">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.PageSize
-        }),
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.PageSize }),
         new PagedListRenderOptions
         {
             LiElementClasses = new[] { "page-item" },
@@ -115,6 +112,7 @@
 
 @await Html.PartialAsync("_DeleteModal")
 @await Html.PartialAsync("_ImportModal")
+
 <script src="~/js/deleteModal.js"></script>
 <script src="~/js/importModal.js"></script>
 

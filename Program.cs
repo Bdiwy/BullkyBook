@@ -1,41 +1,80 @@
 using DataBase;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using BullkyBook.Services;
+using AspNetCore.Localizer.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-    builder.Configuration.GetConnectionString("DefaultConnection")
-    ));
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
-// Register BookCategoryService and WeatherService
+// احذف هذا السطر - AddJsonLocalization غير موجود
+// builder.Services.AddJsonLocalization(options =>
+// {
+//     options.ResourcesPath = "Langs";
+// });
+
+// استخدم هذا بدلاً منه
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+var supportedCultures = new[]
+{
+    new CultureInfo("en"),
+    new CultureInfo("ar")
+};
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("en");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.RequestCultureProviders = new IRequestCultureProvider[]
+    {
+        new RouteDataRequestCultureProvider() // الآن سيعمل بعد إضافة using
+        {
+            RouteDataStringKey = "culture",
+            UIRouteDataStringKey = "culture"
+        },
+        new CookieRequestCultureProvider()
+    };
+});
+
 builder.Services.AddScoped<BookCategoryService>();
 builder.Services.AddScoped<WeatherService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+var localizationOptions = app.Services
+    .GetRequiredService<Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>();
+app.UseRequestLocalization(localizationOptions.Value);
+
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapStaticAssets();
-
+// --------- Routes with Language Prefix ---------
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+    name: "localized",
+    pattern: "{culture=en}/{controller=Home}/{action=Index}/{id?}"
+).WithStaticAssets();
 
 app.MapFallbackToController("NotFound", "Home");
+
 app.Run();
