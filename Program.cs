@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using BullkyBook.Services;
-using AspNetCore.Localizer.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,13 +15,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-// احذف هذا السطر - AddJsonLocalization غير موجود
-// builder.Services.AddJsonLocalization(options =>
-// {
-//     options.ResourcesPath = "Langs";
-// });
-
-// استخدم هذا بدلاً منه
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 var supportedCultures = new[]
@@ -38,7 +30,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = supportedCultures;
     options.RequestCultureProviders = new IRequestCultureProvider[]
     {
-        new RouteDataRequestCultureProvider() // الآن سيعمل بعد إضافة using
+        new RouteDataRequestCultureProvider()
         {
             RouteDataStringKey = "culture",
             UIRouteDataStringKey = "culture"
@@ -69,7 +61,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// --------- Routes with Language Prefix ---------
 app.MapControllerRoute(
     name: "localized",
     pattern: "{culture=en}/{controller=Home}/{action=Index}/{id?}"
